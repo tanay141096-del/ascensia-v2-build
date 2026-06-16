@@ -697,20 +697,20 @@ section {
 }
 
 .confirm-header h1 {
-  font-size: 44px;
+  font-size: 64px;
   color: var(--white);
   font-weight: 800;
-  margin-bottom: 8px;
-  line-height: 1.15;
+  margin-bottom: 12px;
+  line-height: 1.1;
 }
 
 .confirm-header h2 {
-  font-size: 36px;
+  font-size: 52px;
   color: var(--accent-cyan);
   font-style: italic;
   font-weight: 800;
   margin-bottom: 24px;
-  line-height: 1.2;
+  line-height: 1.15;
 }
 
 .confirm-subtext {
@@ -877,11 +877,11 @@ section {
   }
 
   .confirm-header h1 {
-    font-size: 30px;
+    font-size: 40px;
   }
 
   .confirm-header h2 {
-    font-size: 24px;
+    font-size: 32px;
   }
 
   .confirm-fit-grid {

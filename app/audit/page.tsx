@@ -26,7 +26,7 @@ export default function Audit() {
             </CalendlyButton>
           </div>
           <p className="hero-fineprint">
-            Spaces limited, max 6 clients at any time
+            Spaces limited
           </p>
         </div>
       </header>
@@ -181,7 +181,7 @@ export default function Audit() {
             >
               LinkedIn
             </a>{" "}
-            and say START.
+            let&apos;s chat.
           </p>
         </div>
       </section>

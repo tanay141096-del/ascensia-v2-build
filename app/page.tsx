@@ -30,7 +30,7 @@ export default function Home() {
             </a>
           </div>
           <p className="hero-fineprint">
-            Free 45-minute audit. No pitch. Max 6 clients at any time.
+            Free 45-minute audit. No pitch.
           </p>
         </div>
       </header>
@@ -264,7 +264,7 @@ export default function Home() {
             Book Your Free Audit
           </CalendlyButton>
           <p className="cta-fineprint">
-            Max 6 clients · linkedin.com/in/tanay-shah-revops-lead
+            linkedin.com/in/tanay-shah-revops-lead
           </p>
         </div>
       </section>

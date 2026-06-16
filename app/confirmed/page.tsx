@@ -13,7 +13,7 @@ export default function Confirmed() {
           <h2>Here&apos;s What To Do Before We Speak</h2>
           <p className="confirm-subtext">
             Read this page before our call. It will make our 45 minutes
-            considerably more useful for you.
+            considerably more useful.
           </p>
         </div>
 
