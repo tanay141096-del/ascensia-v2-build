@@ -1,0 +1,40 @@
+"use client";
+
+import { useState } from "react";
+
+export default function Navbar() {
+  const [open, setOpen] = useState(false);
+
+  const links = (
+    <>
+      <a href="#what-we-do" className="nav-link" onClick={() => setOpen(false)}>
+        What We Do
+      </a>
+      <a href="#proof" className="nav-link" onClick={() => setOpen(false)}>
+        Proof
+      </a>
+      <a href="/audit" className="btn btn-filled nav-cta">
+        Book Free Audit
+      </a>
+    </>
+  );
+
+  return (
+    <nav className="navbar">
+      <div className="nav-inner">
+        <span className="nav-logo">Acsensia</span>
+        <div className="nav-links">{links}</div>
+        <button
+          className="nav-toggle"
+          aria-label="Toggle navigation menu"
+          onClick={() => setOpen((v) => !v)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+      </div>
+      <div className={`nav-mobile-panel ${open ? "open" : ""}`}>{links}</div>
+    </nav>
+  );
+}
