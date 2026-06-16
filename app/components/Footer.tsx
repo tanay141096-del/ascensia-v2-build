@@ -1,3 +1,5 @@
+import { basePath } from "../lib/basePath";
+
 export default function Footer() {
   return (
     <footer className="footer">
@@ -6,7 +8,7 @@ export default function Footer() {
           <div className="footer-brand">
             <div className="footer-logo-row">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/logo.png" alt="" className="brand-logo" />
+              <img src={`${basePath}/logo.png`} alt="" className="brand-logo" />
               <strong>Acsensia</strong>
             </div>
             <span>Revenue Operations Consulting</span>

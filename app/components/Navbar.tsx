@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { basePath } from "../lib/basePath";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -13,7 +14,7 @@ export default function Navbar() {
       <a href="#proof" className="nav-link" onClick={() => setOpen(false)}>
         Proof
       </a>
-      <a href="/audit" className="btn btn-filled nav-cta">
+      <a href={`${basePath}/audit`} className="btn btn-filled nav-cta">
         Book Free Audit
       </a>
     </>
@@ -22,9 +23,9 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="nav-inner">
-        <a href="/" className="nav-logo">
+        <a href={`${basePath}/`} className="nav-logo">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.png" alt="" className="brand-logo" />
+          <img src={`${basePath}/logo.png`} alt="" className="brand-logo" />
           <span className="nav-logo-text">Acsensia</span>
         </a>
         <div className="nav-links">{links}</div>
