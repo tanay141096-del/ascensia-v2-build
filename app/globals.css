@@ -99,8 +99,8 @@ img {
   left: 0;
   right: 0;
   z-index: 1000;
-  background: var(--white);
-  border-bottom: 1px solid var(--border);
+  background: var(--primary-dark);
+  border-bottom: 1px solid #2a3650;
 }
 
 .nav-inner {
@@ -114,9 +114,20 @@ img {
 }
 
 .nav-logo {
-  font-weight: 700;
-  font-size: 20px;
-  color: var(--primary-dark);
+  display: flex;
+  align-items: center;
+}
+
+.brand-logo {
+  height: 44px;
+  width: auto;
+  border-radius: 6px;
+  display: block;
+}
+
+.footer-logo {
+  height: 56px;
+  margin-bottom: 12px;
 }
 
 .nav-links {
@@ -126,7 +137,7 @@ img {
 }
 
 .nav-link {
-  color: var(--text-muted);
+  color: #94a3b8;
   font-size: 15px;
   font-weight: 500;
   transition: color 0.15s ease;
@@ -157,7 +168,7 @@ img {
   display: block;
   height: 2px;
   width: 100%;
-  background: var(--primary-dark);
+  background: var(--white);
 }
 
 .nav-mobile-panel {
@@ -165,8 +176,8 @@ img {
   flex-direction: column;
   gap: 8px;
   padding: 16px 24px 24px;
-  background: var(--white);
-  border-bottom: 1px solid var(--border);
+  background: var(--primary-dark);
+  border-bottom: 1px solid #2a3650;
 }
 
 .nav-mobile-panel.open {
@@ -540,6 +551,31 @@ section {
   font-size: 46px;
 }
 
+.hero-compact {
+  padding-bottom: 48px;
+}
+
+/* Booking widget - the main event on the audit page */
+
+.widget-section {
+  padding: 0 0 80px;
+}
+
+.calendly-wrap {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.calendly-inline-widget {
+  width: 100%;
+  height: 980px;
+  display: block;
+}
+
 /* What we cover - 2x2 colored grid */
 
 .cover-grid {
@@ -676,6 +712,10 @@ section {
 
   .hero-auto h1 {
     font-size: 30px;
+  }
+
+  .calendly-inline-widget {
+    height: 760px;
   }
 
   .section-heading h2 {
