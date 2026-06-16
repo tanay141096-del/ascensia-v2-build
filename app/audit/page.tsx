@@ -1,10 +1,15 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import CalendlyButton from "../components/CalendlyButton";
+import CalendlyBadge from "../components/CalendlyBadge";
 
 export default function Audit() {
   return (
     <>
+      <link
+        rel="stylesheet"
+        href="https://assets.calendly.com/assets/external/widget.css"
+      />
       <Navbar />
 
       {/* HERO */}
@@ -187,6 +192,7 @@ export default function Audit() {
       </section>
 
       <Footer />
+      <CalendlyBadge />
     </>
   );
 }

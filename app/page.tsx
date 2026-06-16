@@ -1,10 +1,15 @@
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import CalendlyButton from "./components/CalendlyButton";
+import CalendlyBadge from "./components/CalendlyBadge";
 
 export default function Home() {
   return (
     <>
+      <link
+        rel="stylesheet"
+        href="https://assets.calendly.com/assets/external/widget.css"
+      />
       <Navbar />
 
       {/* HERO */}
@@ -270,6 +275,7 @@ export default function Home() {
       </section>
 
       <Footer />
+      <CalendlyBadge />
     </>
   );
 }
