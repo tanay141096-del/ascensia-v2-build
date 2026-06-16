@@ -24,7 +24,8 @@ export default function Navbar() {
       <div className="nav-inner">
         <a href="/" className="nav-logo">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.png" alt="Acsensia" className="brand-logo" />
+          <img src="/logo.png" alt="" className="brand-logo" />
+          <span className="nav-logo-text">Acsensia</span>
         </a>
         <div className="nav-links">{links}</div>
         <button

@@ -1,9 +1,8 @@
-import Script from "next/script";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 const CALENDLY_URL =
-  "https://calendly.com/tanay141096/audit?background_color=1c2333&text_color=ffffff&primary_color=3aabdc";
+  "https://calendly.com/tanay141096/audit?background_color=151922&text_color=ffffff&primary_color=3aabdc";
 
 export default function Audit() {
   return (
@@ -11,7 +10,7 @@ export default function Audit() {
       <Navbar />
 
       {/* HERO */}
-      <header className="hero hero-auto hero-compact">
+      <header className="hero hero-auto">
         <div className="hero-inner">
           <span className="label hero-label">Free Revenue Systems Audit</span>
           <h1>
@@ -23,27 +22,16 @@ export default function Audit() {
             follow-up sequences. You get a written report within 48 hours. No
             pitch. No obligation.
           </p>
+          <div className="hero-buttons">
+            <a href={CALENDLY_URL} className="btn btn-filled">
+              Book Your Free Audit
+            </a>
+          </div>
           <p className="hero-fineprint">
             Spaces limited, max 6 clients at any time
           </p>
         </div>
       </header>
-
-      {/* BOOKING WIDGET - the main event */}
-      <section className="section-light widget-section">
-        <div className="container">
-          <div className="calendly-wrap">
-            <div
-              className="calendly-inline-widget"
-              data-url={CALENDLY_URL}
-            />
-          </div>
-        </div>
-      </section>
-      <Script
-        src="https://assets.calendly.com/assets/external/widget.js"
-        strategy="afterInteractive"
-      />
 
       {/* WHAT WE COVER */}
       <section className="section-light">
@@ -171,6 +159,32 @@ export default function Audit() {
               </ul>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* BOOKING CTA */}
+      <section className="section-light cta-section">
+        <div className="container">
+          <div className="section-heading">
+            <h2>Book your free 20-minute audit.</h2>
+            <p>
+              Pick a time. I will send 3 short questions to answer beforehand
+              so we make the 20 minutes count.
+            </p>
+          </div>
+          <a href={CALENDLY_URL} className="btn btn-filled">
+            Choose a Time
+          </a>
+          <p className="cta-fineprint">
+            Not ready to book? Connect on{" "}
+            <a
+              href="https://www.linkedin.com/in/tanay-shah-revops-lead/"
+              style={{ color: "var(--accent-cyan)" }}
+            >
+              LinkedIn
+            </a>{" "}
+            and say START.
+          </p>
         </div>
       </section>
 

@@ -1,6 +1,9 @@
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
+const CALENDLY_URL =
+  "https://calendly.com/tanay141096/audit?background_color=151922&text_color=ffffff&primary_color=3aabdc";
+
 export default function Home() {
   return (
     <>
@@ -21,7 +24,7 @@ export default function Home() {
             handling those leads was never properly built.
           </p>
           <div className="hero-buttons">
-            <a href="/audit" className="btn btn-filled">
+            <a href={CALENDLY_URL} className="btn btn-filled">
               Book Free Audit
             </a>
             <a href="#what-we-do" className="btn btn-outline">
@@ -259,7 +262,7 @@ export default function Home() {
               useful in 20 minutes, you have lost nothing.
             </p>
           </div>
-          <a href="/audit" className="btn btn-filled">
+          <a href={CALENDLY_URL} className="btn btn-filled">
             Book Your Free Audit
           </a>
           <p className="cta-fineprint">

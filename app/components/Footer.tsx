@@ -4,8 +4,11 @@ export default function Footer() {
       <div className="container">
         <div className="footer-inner">
           <div className="footer-brand">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo.png" alt="Acsensia" className="brand-logo footer-logo" />
+            <div className="footer-logo-row">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/logo.png" alt="" className="brand-logo" />
+              <strong>Acsensia</strong>
+            </div>
             <span>Revenue Operations Consulting</span>
           </div>
           <div className="footer-contact">
