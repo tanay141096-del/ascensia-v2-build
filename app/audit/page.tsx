@@ -1,8 +1,6 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-
-const CALENDLY_URL =
-  "https://calendly.com/tanay141096/audit?background_color=151922&text_color=ffffff&primary_color=3aabdc";
+import CalendlyButton from "../components/CalendlyButton";
 
 export default function Audit() {
   return (
@@ -18,14 +16,14 @@ export default function Audit() {
             costing you every month.
           </h1>
           <p>
-            A structured 20-minute review of your lead flow, pipeline, and
+            A structured 45-minute review of your lead flow, pipeline, and
             follow-up sequences. You get a written report within 48 hours. No
             pitch. No obligation.
           </p>
           <div className="hero-buttons">
-            <a href={CALENDLY_URL} className="btn btn-filled">
+            <CalendlyButton className="btn btn-filled">
               Book Your Free Audit
-            </a>
+            </CalendlyButton>
           </div>
           <p className="hero-fineprint">
             Spaces limited, max 6 clients at any time
@@ -37,7 +35,7 @@ export default function Audit() {
       <section className="section-light">
         <div className="container">
           <div className="section-heading">
-            <h2>20 minutes. Everything assessed.</h2>
+            <h2>45 minutes. Everything assessed.</h2>
           </div>
           <div className="cover-grid">
             <div className="cover-card cover-cyan">
@@ -166,15 +164,15 @@ export default function Audit() {
       <section className="section-light cta-section">
         <div className="container">
           <div className="section-heading">
-            <h2>Book your free 20-minute audit.</h2>
+            <h2>Book your free 45-minute audit.</h2>
             <p>
               Pick a time. I will send 3 short questions to answer beforehand
-              so we make the 20 minutes count.
+              so we make the 45 minutes count.
             </p>
           </div>
-          <a href={CALENDLY_URL} className="btn btn-filled">
+          <CalendlyButton className="btn btn-filled">
             Choose a Time
-          </a>
+          </CalendlyButton>
           <p className="cta-fineprint">
             Not ready to book? Connect on{" "}
             <a

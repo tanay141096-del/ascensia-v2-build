@@ -1,8 +1,6 @@
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-
-const CALENDLY_URL =
-  "https://calendly.com/tanay141096/audit?background_color=151922&text_color=ffffff&primary_color=3aabdc";
+import CalendlyButton from "./components/CalendlyButton";
 
 export default function Home() {
   return (
@@ -24,15 +22,15 @@ export default function Home() {
             handling those leads was never properly built.
           </p>
           <div className="hero-buttons">
-            <a href={CALENDLY_URL} className="btn btn-filled">
+            <CalendlyButton className="btn btn-filled">
               Book Free Audit
-            </a>
+            </CalendlyButton>
             <a href="#what-we-do" className="btn btn-outline">
               See How It Works
             </a>
           </div>
           <p className="hero-fineprint">
-            Free 20-minute audit. No pitch. Max 6 clients at any time.
+            Free 45-minute audit. No pitch. Max 6 clients at any time.
           </p>
         </div>
       </header>
@@ -255,16 +253,16 @@ export default function Home() {
         <div className="container">
           <div className="section-heading">
             <span className="label">Ready to Start</span>
-            <h2>Book a free 20-minute pipeline audit.</h2>
+            <h2>Book a free 45-minute pipeline audit.</h2>
             <p>
               We look at your setup and tell you exactly where revenue is
               leaking. No pitch. No obligation. If we cannot find anything
-              useful in 20 minutes, you have lost nothing.
+              useful in 45 minutes, you have lost nothing.
             </p>
           </div>
-          <a href={CALENDLY_URL} className="btn btn-filled">
+          <CalendlyButton className="btn btn-filled">
             Book Your Free Audit
-          </a>
+          </CalendlyButton>
           <p className="cta-fineprint">
             Max 6 clients · linkedin.com/in/tanay-shah-revops-lead
           </p>

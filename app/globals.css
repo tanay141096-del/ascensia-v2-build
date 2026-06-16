@@ -668,6 +668,190 @@ section {
   color: var(--text-muted);
 }
 
+/* ---------- Standalone booking confirmation page ---------- */
+
+.confirm-page {
+  background: var(--primary-dark);
+  min-height: 100vh;
+  padding: 80px 24px 100px;
+}
+
+.confirm-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.confirm-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.confirm-wordmark {
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--white);
+  margin-bottom: 48px;
+}
+
+.confirm-header h1 {
+  font-size: 44px;
+  color: var(--white);
+  font-weight: 800;
+  margin-bottom: 8px;
+  line-height: 1.15;
+}
+
+.confirm-header h2 {
+  font-size: 36px;
+  color: var(--accent-cyan);
+  font-style: italic;
+  font-weight: 800;
+  margin-bottom: 24px;
+  line-height: 1.2;
+}
+
+.confirm-subtext {
+  font-style: italic;
+  color: #94a3b8;
+  max-width: 480px;
+  margin: 0 auto;
+  font-size: 16px;
+}
+
+.confirm-step-label {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--white);
+  text-shadow: 0 0 18px rgba(58, 171, 220, 0.75);
+  margin: 56px 0 16px;
+}
+
+.confirm-card {
+  background: #1b2130;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 28px 32px;
+}
+
+.confirm-card h3 {
+  color: var(--white);
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.confirm-card p {
+  color: #94a3b8;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.confirm-fit-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.confirm-fit-card h4 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+
+.confirm-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.confirm-dot-green {
+  background: var(--green);
+}
+
+.confirm-dot-red {
+  background: #ef4444;
+}
+
+.confirm-fit-card ul li {
+  color: #94a3b8;
+  font-size: 14px;
+  line-height: 1.5;
+  padding-left: 14px;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.confirm-fit-card ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 4px;
+  height: 4px;
+  background: #64748b;
+  border-radius: 50%;
+}
+
+.confirm-faq-prompt {
+  text-align: center;
+  font-style: italic;
+  color: #94a3b8;
+  margin: 48px 0 20px;
+  font-size: 17px;
+}
+
+.confirm-linkedin-row {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.confirm-linkedin-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--accent-cyan);
+  color: var(--primary-dark);
+  font-weight: 700;
+  font-size: 15px;
+  padding: 14px 28px;
+  border-radius: 999px;
+  text-decoration: none;
+}
+
+.confirm-linkedin-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  background: var(--primary-dark);
+  border-radius: 6px;
+  color: var(--white);
+}
+
+.confirm-divider {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 32px;
+}
+
+.confirm-footer-text {
+  text-align: center;
+  color: #64748b;
+  font-size: 14px;
+}
+
 /* ---------- Responsive ---------- */
 
 @media (max-width: 768px) {
@@ -690,6 +874,22 @@ section {
   .fit-grid,
   .cover-grid {
     grid-template-columns: 1fr;
+  }
+
+  .confirm-header h1 {
+    font-size: 30px;
+  }
+
+  .confirm-header h2 {
+    font-size: 24px;
+  }
+
+  .confirm-fit-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .confirm-card {
+    padding: 22px 20px;
   }
 
   .deliverable-row {
