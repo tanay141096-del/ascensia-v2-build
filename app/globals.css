@@ -531,30 +531,118 @@ section {
 
 /* ---------- Audit page ---------- */
 
-.audit-page {
-  min-height: 100vh;
-  background: var(--primary-dark);
+.hero-auto {
+  min-height: auto;
+  padding: 160px 24px 96px;
+}
+
+.hero-auto h1 {
+  font-size: 46px;
+}
+
+/* What we cover - 2x2 colored grid */
+
+.cover-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.cover-card {
+  border-radius: 6px;
+  padding: 24px;
+  color: var(--text-dark);
+}
+
+.cover-card h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.cover-card p {
+  font-size: 14px;
+  color: #475569;
+}
+
+.cover-cyan {
+  background: #cffafe;
+}
+
+.cover-blue {
+  background: #dbeafe;
+}
+
+.cover-green {
+  background: #dcfce7;
+}
+
+.cover-amber {
+  background: #fef3c7;
+}
+
+/* Deliverables timeline */
+
+.deliverables {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 140px 24px 80px;
-  text-align: center;
+  flex-direction: column;
+  gap: 32px;
 }
 
-.audit-box {
-  max-width: 560px;
+.deliverable-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 24px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid #2a3650;
 }
 
-.audit-box h1 {
+.deliverable-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.deliverable-time {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 13px;
+  color: var(--accent-cyan);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.deliverable-content h3 {
   color: var(--white);
-  font-size: 36px;
-  margin-bottom: 16px;
+  font-size: 20px;
+  margin-bottom: 12px;
 }
 
-.audit-box p {
+.deliverable-content ul {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.deliverable-content li {
   color: #94a3b8;
-  font-size: 16px;
-  margin-bottom: 32px;
+  font-size: 15px;
+  padding-left: 18px;
+  position: relative;
+}
+
+.deliverable-content li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 6px;
+  height: 6px;
+  background: var(--accent-cyan);
+  border-radius: 50%;
+}
+
+/* Light-background CTA needs darker muted text for contrast */
+
+.section-light.cta-section p {
+  color: var(--text-muted);
 }
 
 /* ---------- Responsive ---------- */
@@ -576,8 +664,18 @@ section {
   .cards-row-dark,
   .grid-2col,
   .proof-row,
-  .fit-grid {
+  .fit-grid,
+  .cover-grid {
     grid-template-columns: 1fr;
+  }
+
+  .deliverable-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .hero-auto h1 {
+    font-size: 30px;
   }
 
   .section-heading h2 {

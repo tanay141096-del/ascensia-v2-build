@@ -9,9 +9,12 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Acsensia — Revenue Operations Consulting",
+  title: "Acsensia | Revenue Operations Consulting",
   description:
-    "We build the backend infrastructure that lets revenue actually move — pipelines, pre-call sequences, post-call follow-up, tagging, and dashboards.",
+    "We build the backend infrastructure that lets revenue actually move: pipelines, pre-call sequences, post-call follow-up, tagging, and dashboards.",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({

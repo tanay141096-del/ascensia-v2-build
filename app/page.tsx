@@ -1,4 +1,5 @@
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 export default function Home() {
   return (
@@ -15,9 +16,9 @@ export default function Home() {
             Your backend is.
           </h1>
           <p>
-            Most businesses at your stage are losing £5,000–£20,000 every month
-            not because leads are bad — but because the system handling those
-            leads was never properly built.
+            Most businesses at your stage are losing £5,000–£20,000 every
+            month. Not because leads are bad, but because the system
+            handling those leads was never properly built.
           </p>
           <div className="hero-buttons">
             <a href="/audit" className="btn btn-filled">
@@ -71,21 +72,24 @@ export default function Home() {
           </div>
           <div className="cards-row-dark">
             <div className="card-dark">
-              <h3>01 — Find the Leaks</h3>
+              <div className="card-number">01</div>
+              <h3>Find the Leaks</h3>
               <p>
                 We audit your setup and calculate exactly where revenue is
                 escaping in £.
               </p>
             </div>
             <div className="card-dark">
-              <h3>02 — Build the System</h3>
+              <div className="card-number">02</div>
+              <h3>Build the System</h3>
               <p>
                 We build the infrastructure done for you inside your existing
                 tools.
               </p>
             </div>
             <div className="card-dark">
-              <h3>03 — It Runs Without You</h3>
+              <div className="card-number">03</div>
+              <h3>It Runs Without You</h3>
               <p>
                 Tested. Documented. The pipeline moves whether you are working
                 or not.
@@ -95,7 +99,7 @@ export default function Home() {
           <div className="offer-box">
             We help UK coaches, consultants and agencies stuck at
             £10K–£50K/month build the backend infrastructure that lets revenue
-            actually move — pipelines, pre-call sequences, post-call
+            actually move: pipelines, pre-call sequences, post-call
             follow-up, tagging, and dashboards.
           </div>
         </div>
@@ -166,7 +170,7 @@ export default function Home() {
             <div className="proof-subtext">in 6 months</div>
             <p className="body">
               No CRM. No automation. Founder managing every lead manually.
-              Built the entire infrastructure from scratch — GHL from zero,
+              Built the entire infrastructure from scratch: GHL from zero,
               20+ automation workflows, pre-call sequences, onboarding
               automation. Revenue grew 7x not from new leads but from
               converting the ones already coming in.
@@ -264,25 +268,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="footer">
-        <div className="container">
-          <div className="footer-inner">
-            <div className="footer-brand">
-              <strong>Acsensia</strong>
-              <span>Revenue Operations Consulting</span>
-            </div>
-            <div className="footer-contact">
-              tanay141096@gmail.com
-              <br />
-              linkedin.com/in/tanay-shah-revops-lead
-              <br />
-              +91 9004511099
-            </div>
-          </div>
-          <p className="footer-copyright">© 2025 Acsensia. All rights reserved.</p>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }

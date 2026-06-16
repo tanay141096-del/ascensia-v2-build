@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Logo from "./Logo";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -22,7 +23,9 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="nav-inner">
-        <span className="nav-logo">Acsensia</span>
+        <a href="/" className="nav-logo">
+          <Logo size={32} />
+        </a>
         <div className="nav-links">{links}</div>
         <button
           className="nav-toggle"
