@@ -38,7 +38,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./out
           publish_branch: deploy
-          force_orphan: true
 
   build-and-deploy-preview:
     # Separate build with a /acsensia-v2-build basePath, published to
