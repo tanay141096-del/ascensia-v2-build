@@ -1,9 +1,7 @@
-name: Build and deploy static site
+name: Build and deploy
 
-# Builds the Next.js static export on every push to master and publishes
-# the result to the `deploy` branch. Point Hostinger's Git Auto Deploy
-# feature at the `deploy` branch (with deploy path set to the repo root,
-# which maps to public_html) so the live site updates automatically.
+# Hostinger auto-deploys directly from the master branch (runs npm run build
+# then npm start). This workflow only handles the GitHub Pages preview build.
 
 on:
   push:
@@ -14,35 +12,9 @@ permissions:
   contents: write
 
 jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-          cache: "npm"
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build static export
-        run: npm run build
-
-      - name: Publish out/ to deploy branch
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out
-          publish_branch: deploy
-
   build-and-deploy-preview:
-    # Separate build with a /acsensia-v2-build basePath, published to
-    # gh-pages, so GitHub Pages gives a real public preview URL without
-    # touching the basePath-free build that Hostinger uses.
+    # Static export with /acsensia-v2-build basePath, published to gh-pages
+    # for a public preview URL on GitHub Pages.
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source
@@ -68,4 +40,3 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./out
           publish_branch: gh-pages
-          force_orphan: true

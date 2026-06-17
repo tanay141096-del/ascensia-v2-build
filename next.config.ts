@@ -8,11 +8,10 @@ const isGhPages = process.env.NEXT_PUBLIC_DEPLOY_TARGET === "ghpages";
 const repoName = "acsensia-v2-build";
 
 const nextConfig: NextConfig = {
-  // Static export so the build output (the `out/` folder) is plain
-  // HTML/CSS/JS that Hostinger can serve directly from public_html.
-  output: "export",
+  // Static export only for the GitHub Pages preview build.
+  // Hostinger runs next start (SSR mode) so output: "export" must be absent there.
+  ...(isGhPages ? { output: "export" } : {}),
   images: {
-    // next/image optimization requires a server; disable for static export.
     unoptimized: true,
   },
   basePath: isGhPages ? `/${repoName}` : "",
