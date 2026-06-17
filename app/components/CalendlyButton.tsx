@@ -18,7 +18,11 @@ export default function CalendlyButton({ className, children }: Props) {
       className={className}
       onClick={(e) => {
         e.preventDefault();
-        window.Calendly?.initPopupWidget({ url: CALENDLY_URL });
+        if (window.Calendly) {
+          window.Calendly.initPopupWidget({ url: CALENDLY_URL });
+        } else {
+          window.open(CALENDLY_URL, "_blank");
+        }
       }}
     >
       {children}
