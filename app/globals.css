@@ -123,7 +123,12 @@ img {
 .brand-logo {
   height: 44px;
   width: auto;
-  border-radius: 6px;
+  display: block;
+}
+
+.footer-logo-img {
+  width: 140px;
+  height: auto;
   display: block;
 }
 

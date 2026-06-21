@@ -8,8 +8,7 @@ export default function Footer() {
           <div className="footer-brand">
             <div className="footer-logo-row">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={`${basePath}/logo.png`} alt="" className="brand-logo" />
-              <strong>Acsensia</strong>
+              <img src={`${basePath}/logo.webp`} alt="Ascensia" className="footer-logo-img" />
             </div>
             <span>Revenue Operations Consulting</span>
           </div>
@@ -21,7 +20,7 @@ export default function Footer() {
             +91 9004511099
           </div>
         </div>
-        <p className="footer-copyright">© 2025 Acsensia. All rights reserved.</p>
+        <p className="footer-copyright">© 2025 Ascensia. All rights reserved.</p>
       </div>
     </footer>
   );

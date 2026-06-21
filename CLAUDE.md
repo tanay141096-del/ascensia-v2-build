@@ -1,6 +1,6 @@
-# Acsensia V2 Build
+# Ascensia V2 Build
 
-Website project for Acsensia. This file is read by Claude Code at the start of each session in this repo.
+Website project for Ascensia. This file is read by Claude Code at the start of each session in this repo.
 
 ## Project status
 - Repo just initialized — no website code yet.

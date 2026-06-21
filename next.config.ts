@@ -5,7 +5,7 @@ import type { NextConfig } from "next";
 // domain root and must NOT have one. Toggled by an env var set only in the
 // gh-pages workflow job - the default (Hostinger) build is unaffected.
 const isGhPages = process.env.NEXT_PUBLIC_DEPLOY_TARGET === "ghpages";
-const repoName = "acsensia-v2-build";
+const repoName = "ascensia-v2-build";
 
 const nextConfig: NextConfig = {
   // Static export only for the GitHub Pages preview build.

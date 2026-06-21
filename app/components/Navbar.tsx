@@ -25,8 +25,7 @@ export default function Navbar() {
       <div className="nav-inner">
         <a href={`${basePath}/`} className="nav-logo">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={`${basePath}/logo.png`} alt="" className="brand-logo" />
-          <span className="nav-logo-text">Acsensia</span>
+          <img src={`${basePath}/logo.webp`} alt="Ascensia" className="brand-logo" />
         </a>
         <div className="nav-links">{links}</div>
         <button

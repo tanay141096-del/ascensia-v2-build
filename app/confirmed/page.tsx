@@ -8,7 +8,7 @@ export default function Confirmed() {
     <main className="confirm-page">
       <div className="confirm-inner">
         <div className="confirm-header">
-          <span className="confirm-wordmark">Acsensia</span>
+          <span className="confirm-wordmark">Ascensia</span>
           <h1>Your Audit Is Booked</h1>
           <h2>Here&apos;s What To Do Before We Speak</h2>
           <p className="confirm-subtext">
@@ -128,7 +128,7 @@ export default function Confirmed() {
 
         <div className="confirm-divider" />
         <p className="confirm-footer-text">
-          Tanay Shah · Acsensia · tanay141096@gmail.com
+          Tanay Shah · Ascensia · tanay141096@gmail.com
         </p>
       </div>
     </main>
