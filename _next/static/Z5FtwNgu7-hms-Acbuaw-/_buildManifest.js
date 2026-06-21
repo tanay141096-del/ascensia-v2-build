@@ -3,8 +3,8 @@ self.__BUILD_MANIFEST = {
     "afterFiles": [],
     "beforeFiles": [
       {
-        "source": "/acsensia-v2-build//_next/:path+",
-        "destination": "/acsensia-v2-build/_next/:path+"
+        "source": "/ascensia-v2-build//_next/:path+",
+        "destination": "/ascensia-v2-build/_next/:path+"
       }
     ],
     "fallback": []
