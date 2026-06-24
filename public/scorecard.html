@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRM Health Scorecard | Ascensia</title>
+<meta name="description" content="20 yes/no questions. Takes 3 minutes. Shows you exactly what is manual, what is broken, and what it is costing you. Free, no email required.">
+<link rel="icon" href="/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css">
+<style>
+:root {
+  --navy: #1C2333;
+  --cyan: #3AABDC;
+  --white: #FFFFFF;
+  --bg-light: #F4F7FA;
+  --text-dark: #0F172A;
+  --text-muted: #64748B;
+  --border: #E2E8F0;
+  --nav-bg: #151922;
+  --card-dark: #162030;
+  --grey-body: #94A3B8;
+  --green: #15803d;
+  --green-bg: #dcfce7;
+  --red: #b91c1c;
+  --red-bg: #fee2e2;
+  --amber: #b45309;
+  --amber-bg: #fef3c7;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "Poppins", sans-serif;
+  color: var(--text-dark);
+  background: var(--white);
+  line-height: 1.5;
+}
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; display: block; }
+
+.container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+
+.label {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 11px;
+  color: var(--cyan);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 700;
+  display: block;
+}
+
+.btn {
+  display: inline-block;
+  padding: 14px 28px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.btn-filled { background: var(--cyan); color: var(--white); }
+.btn-filled:hover { background: #2f93c2; }
+
+/* ---------- Navbar (matches live site) ---------- */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: var(--nav-bg);
+  border-bottom: 1px solid #2a3650;
+}
+.nav-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo { display: flex; align-items: center; }
+.brand-logo { height: 44px; width: auto; display: block; }
+.nav-links { display: flex; align-items: center; gap: 32px; }
+.nav-link {
+  color: var(--grey-body);
+  font-size: 15px;
+  font-weight: 500;
+  transition: color 0.15s ease;
+}
+.nav-link:hover { color: var(--cyan); }
+.nav-cta { padding: 10px 20px; font-size: 14px; }
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 28px; height: 28px;
+  background: none; border: none; cursor: pointer;
+}
+.nav-toggle span { display: block; height: 2px; width: 100%; background: var(--white); }
+.nav-mobile-panel {
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 24px 24px;
+  background: var(--nav-bg);
+  border-bottom: 1px solid #2a3650;
+}
+.nav-mobile-panel.open { display: flex; }
+.nav-mobile-panel .nav-cta { align-self: flex-start; margin-top: 8px; }
+
+/* ---------- Hero ---------- */
+.hero {
+  background: var(--navy);
+  padding: 132px 24px 56px;
+  text-align: center;
+}
+.hero-inner { max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
+.hero .label { margin-bottom: 18px; }
+.hero h1 {
+  font-size: 44px;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 18px;
+}
+.hero p {
+  font-size: 16px;
+  color: var(--grey-body);
+  max-width: 500px;
+}
+
+/* ---------- Scorecard quiz ---------- */
+.scorecard-section { background: var(--bg-light); padding: 60px 24px; }
+.scorecard-wrap { max-width: 680px; margin: 0 auto; }
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+.progress-track { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; margin-bottom: 32px; }
+.progress-fill { height: 100%; width: 0%; background: var(--cyan); border-radius: 2px; transition: width 0.25s ease; }
+
+.category-label { margin-bottom: 14px; }
+
+.question-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+}
+.question-text { font-size: 18px; font-weight: 700; color: var(--text-dark); margin-bottom: 20px; }
+.answer-row { display: flex; gap: 12px; }
+.btn-yes, .btn-no {
+  flex: 1;
+  padding: 14px;
+  border: none;
+  border-radius: 6px;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+.btn-yes { background: var(--green-bg); color: var(--green); }
+.btn-no { background: var(--red-bg); color: var(--red); }
+.btn-yes:hover, .btn-no:hover { opacity: 0.78; }
+
+.continue-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 36px 24px;
+  text-align: center;
+}
+.cc-check {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--green-bg);
+  color: var(--green);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+}
+
+/* ---------- Results: score ---------- */
+.results-score-section { background: var(--navy); padding: 60px 24px; text-align: center; }
+.score-ring-wrap { position: relative; width: 160px; height: 160px; margin: 0 auto 24px; }
+.score-ring { transform: rotate(-90deg); width: 160px; height: 160px; }
+.ring-track { fill: none; stroke: #2a3650; stroke-width: 10; }
+.ring-fill { fill: none; stroke: var(--cyan); stroke-width: 10; stroke-linecap: round; transition: stroke-dashoffset 0.6s ease; }
+.score-center {
+  position: absolute; inset: 0;
+  display: flex; align-items: baseline; justify-content: center; gap: 2px;
+}
+.score-num { font-size: 42px; font-weight: 700; color: var(--cyan); }
+.score-max { font-size: 18px; color: var(--grey-body); }
+
+.result-label {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  display: block;
+}
+.result-label.green { color: #4ade80; }
+.result-label.amber { color: #fbbf24; }
+.result-label.red { color: #f87171; }
+.results-score-section h2 { color: var(--white); font-size: 27px; margin-bottom: 12px; }
+.result-body { color: var(--grey-body); font-size: 15px; max-width: 480px; margin: 0 auto; }
+
+/* ---------- Results: gaps ---------- */
+.gaps-section { background: var(--bg-light); padding: 60px 24px; }
+.gaps-wrap { max-width: 680px; margin: 0 auto; }
+.gaps-heading { margin-bottom: 24px; }
+
+.gap-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--red);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.gap-category {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 11px;
+  color: var(--red);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  display: block;
+}
+.gap-question { font-size: 15px; font-weight: 600; color: var(--text-dark); margin-bottom: 6px; }
+.gap-fix { font-size: 14px; color: var(--text-muted); font-style: italic; }
+
+.gaps-cta { text-align: center; margin-top: 28px; }
+.gaps-cta .fineprint { font-size: 12px; color: var(--text-muted); margin-top: 14px; }
+.calc-link {
+  display: inline-block;
+  margin-top: 22px;
+  color: var(--cyan);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* ---------- Footer (matches live site) ---------- */
+.footer { background: var(--nav-bg); padding: 40px 0; }
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #1f2c40;
+}
+.footer-logo-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.footer-logo-img { width: 140px; height: auto; display: block; }
+.footer-brand span { color: var(--grey-body); font-size: 14px; }
+.footer-contact { color: var(--grey-body); font-size: 14px; text-align: right; }
+.footer-copyright { padding-top: 24px; text-align: center; color: var(--text-muted); font-size: 13px; }
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: 28px; }
+  .nav-links { display: none; }
+  .nav-toggle { display: flex; }
+  .answer-row { flex-direction: column; }
+  .footer-inner { flex-direction: column; }
+  .footer-contact { text-align: left; }
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="/logo.webp" alt="Ascensia" class="brand-logo">
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="/#what-we-do" class="nav-link">What We Do</a>
+      <a href="/#proof" class="nav-link">Proof</a>
+      <a href="/calculator.html" class="nav-link">Calculator</a>
+      <a href="https://calendly.com/tanay141096/audit" class="btn btn-filled nav-cta" id="nav-audit-btn">Book Free Audit</a>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" onclick="document.getElementById('nav-mobile-panel').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-mobile-panel" id="nav-mobile-panel">
+    <a href="/#what-we-do" class="nav-link">What We Do</a>
+    <a href="/#proof" class="nav-link">Proof</a>
+    <a href="/calculator.html" class="nav-link">Calculator</a>
+    <a href="https://calendly.com/tanay141096/audit" class="btn btn-filled nav-cta" id="nav-audit-btn-mobile">Book Free Audit</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <span class="label">Free Scorecard</span>
+    <h1>Is your pipeline running on systems or on your memory?</h1>
+    <p>20 yes/no questions. Takes 3 minutes. Shows you exactly what is manual, what is broken, and what it is costing you. Free. No email required.</p>
+  </div>
+</header>
+
+<section class="scorecard-section">
+  <div class="scorecard-wrap" id="quiz-area">
+    <div class="progress-header">
+      <span id="progress-text">Question 1 of 20</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+    <div id="quiz-stage"></div>
+  </div>
+</section>
+
+<div id="results-area" style="display: none;">
+  <section class="results-score-section">
+    <div class="score-ring-wrap">
+      <svg class="score-ring" viewBox="0 0 160 160">
+        <circle class="ring-track" cx="80" cy="80" r="70"></circle>
+        <circle class="ring-fill" id="ring-fill" cx="80" cy="80" r="70"></circle>
+      </svg>
+      <div class="score-center">
+        <span class="score-num" id="score-num">0</span><span class="score-max">/20</span>
+      </div>
+    </div>
+    <span class="result-label" id="result-label"></span>
+    <h2 id="result-headline"></h2>
+    <p class="result-body" id="result-body"></p>
+  </section>
+
+  <section class="gaps-section">
+    <div class="gaps-wrap">
+      <div class="gaps-heading">
+        <span class="label">Your No Answers</span>
+      </div>
+      <div id="gaps-list"></div>
+      <div class="gaps-cta">
+        <a href="https://calendly.com/tanay141096/audit" class="btn btn-filled" id="cta-audit-btn">Book a Free 20-Minute Audit</a>
+        <p class="fineprint">We fix exactly the gaps above. Free audit. No pitch.</p>
+        <br>
+        <a href="/calculator.html" class="calc-link">Try the Revenue Leak Calculator →</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo-row">
+          <img src="/logo.webp" alt="Ascensia" class="footer-logo-img">
+        </div>
+        <span>Revenue Operations Consulting</span>
+      </div>
+      <div class="footer-contact">
+        tanay141096@gmail.com<br>
+        linkedin.com/in/tanay-shah-revops-lead<br>
+        +91 9004511099
+      </div>
+    </div>
+    <p class="footer-copyright">© 2025 Ascensia. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="https://assets.calendly.com/assets/external/widget.js"></script>
+<script>
+const CALENDLY_URL = "https://calendly.com/tanay141096/audit?background_color=151922&text_color=ffffff&primary_color=3aabdc";
+['nav-audit-btn', 'nav-audit-btn-mobile', 'cta-audit-btn'].forEach(function (id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.addEventListener('click', function (e) {
+    e.preventDefault();
+    if (window.Calendly) {
+      window.Calendly.initPopupWidget({ url: CALENDLY_URL });
+    } else {
+      window.open(CALENDLY_URL, '_blank');
+    }
+  });
+});
+
+const QUESTIONS = [
+  { category: 'Pipeline', text: 'Does every lead you speak to end up in a CRM?', fix: 'Every lead needs to be in a CRM. If it is not tracked, it does not exist.' },
+  { category: 'Pipeline', text: 'Does every pipeline stage have a clear definition of what belongs there?', fix: 'Vague stages mean leads sit in the wrong place forever.' },
+  { category: 'Pipeline', text: 'Do you have a £ value on every active deal in your pipeline?', fix: 'No deal values means no pipeline revenue visibility.' },
+  { category: 'Pipeline', text: 'Do you track why every lost deal was lost (lost reason)?', fix: 'Not knowing why you lose deals means you keep losing them.' },
+  { category: 'Pipeline', text: 'Can you see your entire pipeline in 60 seconds without calling anyone?', fix: 'If seeing the pipeline requires work, it does not get checked.' },
+
+  { category: 'Lead Response', text: 'Does a new lead automatically get a response within 5 minutes?', fix: 'After 5 minutes, lead conversion drops by 400%.' },
+  { category: 'Lead Response', text: 'Does a new lead automatically get added to your CRM without anyone manually doing it?', fix: 'Manual contact creation means leads fall through every weekend.' },
+  { category: 'Lead Response', text: 'Do you know where every lead came from (inbound, outbound, referral)?', fix: 'No source tracking means spending on channels that do not convert.' },
+  { category: 'Lead Response', text: 'Do you have a different follow-up process for inbound vs outbound leads?', fix: 'A cold DM and an inbound enquiry need completely different handling.' },
+
+  { category: 'Show-Up Rate', text: 'Does every booked call automatically get a reminder sent before it happens?', fix: 'Without reminders, 40-50% of booked calls do not show.' },
+  { category: 'Show-Up Rate', text: 'Do you send more than one reminder before each call?', fix: 'One reminder is not enough. Three reminders (24hr, 1hr, 15min) moves show-up to 75-80%.' },
+  { category: 'Show-Up Rate', text: 'When someone misses a call, does an automatic message go out within 15 minutes asking them to rebook?', fix: '20-35% of no-shows rebook from a single message 15 minutes after the missed call.' },
+  { category: 'Show-Up Rate', text: 'Do you know your show-up rate for the last 30 days without checking a spreadsheet?', fix: 'If you do not know the number, you cannot improve it.' },
+
+  { category: 'Follow-Up', text: 'Does your system automatically follow up with people who attended a call but did not buy?', fix: '80% of sales need 5+ follow-ups. Most founders stop at 2.' },
+  { category: 'Follow-Up', text: 'Do you send more than 3 follow-up messages after a no-close call?', fix: 'The leads who say "I need to think about it" need 7 touches over 21 days.' },
+  { category: 'Follow-Up', text: 'Do you have an automated sequence for leads who went cold 60+ days ago?', fix: 'Dormant leads are paid-for traffic that has not converted yet.' },
+  { category: 'Follow-Up', text: 'When someone does not show up, does an automated sequence try to rebook them?', fix: 'No-show recovery is free revenue from leads you already have.' },
+
+  { category: 'Reporting', text: 'Do you know your close rate from the last 30 days right now, without opening a spreadsheet?', fix: 'Without knowing close rate, you cannot reverse-engineer the pipeline.' },
+  { category: 'Reporting', text: 'Do you know which lead source produces the most paying clients?', fix: 'Attribution tells you where to spend, not where to post.' },
+  { category: 'Reporting', text: 'Do you receive an automated weekly summary of your pipeline metrics?', fix: 'A weekly metrics email means the founder sees the business without opening the CRM.' }
+];
+
+let current = 0;
+let awaitingContinue = false;
+const answers = new Array(QUESTIONS.length).fill(null);
+
+function isFirstOfCategory(i) {
+  return i === 0 || QUESTIONS[i].category !== QUESTIONS[i - 1].category;
+}
+function isLastOfCategory(i) {
+  return i === QUESTIONS.length - 1 || QUESTIONS[i].category !== QUESTIONS[i + 1].category;
+}
+
+function render() {
+  const total = QUESTIONS.length;
+  if (current >= total) { showResults(); return; }
+
+  const answeredCount = answers.filter(function (a) { return a !== null; }).length;
+  document.getElementById('progress-fill').style.width = (answeredCount / total * 100) + '%';
+  document.getElementById('progress-text').textContent = awaitingContinue
+    ? QUESTIONS[current].category + ' complete'
+    : 'Question ' + (current + 1) + ' of ' + total;
+
+  if (awaitingContinue) {
+    renderContinueCard();
+  } else {
+    renderQuestionCard();
+  }
+}
+
+function renderQuestionCard() {
+  const q = QUESTIONS[current];
+  const stage = document.getElementById('quiz-stage');
+  stage.innerHTML =
+    (isFirstOfCategory(current) ? '<span class="label category-label">' + q.category + '</span>' : '') +
+    '<div class="question-card">' +
+      '<p class="question-text">' + q.text + '</p>' +
+      '<div class="answer-row">' +
+        '<button class="btn-yes" type="button">Yes</button>' +
+        '<button class="btn-no" type="button">No</button>' +
+      '</div>' +
+    '</div>';
+  stage.querySelector('.btn-yes').addEventListener('click', function () { answer(true); });
+  stage.querySelector('.btn-no').addEventListener('click', function () { answer(false); });
+}
+
+function renderContinueCard() {
+  const nextCategory = QUESTIONS[current + 1].category;
+  const stage = document.getElementById('quiz-stage');
+  stage.innerHTML =
+    '<div class="continue-card">' +
+      '<div class="cc-check">✓</div>' +
+      '<button class="btn btn-filled" type="button">Continue to ' + nextCategory + '</button>' +
+    '</div>';
+  stage.querySelector('button').addEventListener('click', advanceCategory);
+}
+
+function answer(value) {
+  answers[current] = value;
+  if (isLastOfCategory(current) && current < QUESTIONS.length - 1) {
+    awaitingContinue = true;
+  } else {
+    current++;
+  }
+  render();
+}
+
+function advanceCategory() {
+  awaitingContinue = false;
+  current++;
+  render();
+}
+
+function showResults() {
+  document.getElementById('quiz-area').parentElement.style.display = 'none';
+  document.getElementById('results-area').style.display = '';
+
+  const score = answers.filter(function (a) { return a === true; }).length;
+  document.getElementById('score-num').textContent = score;
+
+  const r = 70;
+  const circumference = 2 * Math.PI * r;
+  const ringFill = document.getElementById('ring-fill');
+  ringFill.style.strokeDasharray = circumference;
+  ringFill.style.strokeDashoffset = circumference * (1 - score / QUESTIONS.length);
+
+  let band;
+  if (score >= 16) {
+    band = { label: 'Strong Foundation', cls: 'green', headline: 'Your pipeline has solid infrastructure.', body: 'Most of the basics are in place. There are still gaps — the ones below are worth looking at.' };
+  } else if (score >= 11) {
+    band = { label: 'Leaking Revenue', cls: 'amber', headline: '2-3 gaps are costing you money every month.', body: 'The gaps below are fixable. Each one has a specific build behind it.' };
+  } else if (score >= 6) {
+    band = { label: 'Significant Gaps', cls: 'red', headline: 'Most of your pipeline depends on you personally.', body: 'These are not complicated to fix. They just need to be built.' };
+  } else {
+    band = { label: 'Rebuild Needed', cls: 'red', headline: 'Almost everything depends on you remembering to do it.', body: 'The good news: none of this takes long to fix once someone knows what to build.' };
+  }
+
+  const labelEl = document.getElementById('result-label');
+  labelEl.textContent = band.label;
+  labelEl.className = 'result-label ' + band.cls;
+  document.getElementById('result-headline').textContent = band.headline;
+  document.getElementById('result-body').textContent = band.body;
+
+  const gapsList = document.getElementById('gaps-list');
+  gapsList.innerHTML = '';
+  QUESTIONS.forEach(function (q, i) {
+    if (answers[i] === false) {
+      const card = document.createElement('div');
+      card.className = 'gap-card';
+      card.innerHTML =
+        '<span class="gap-category">' + q.category + '</span>' +
+        '<p class="gap-question">' + q.text + '</p>' +
+        '<p class="gap-fix">' + q.fix + '</p>';
+      gapsList.appendChild(card);
+    }
+  });
+  if (!gapsList.children.length) {
+    gapsList.innerHTML = '<p style="text-align:center;color:var(--text-muted);font-size:14px;">No gaps found — every answer was yes.</p>';
+  }
+}
+
+render();
+</script>
+</body>
+</html>
