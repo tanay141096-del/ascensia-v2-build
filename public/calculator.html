@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pipeline Leak Calculator | Ascensia</title>
+<meta name="description" content="See exactly how much revenue your pipeline is leaking every month, and where it's going. Free calculator, no email required.">
+<link rel="icon" href="/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css">
+<style>
+:root {
+  --navy: #1C2333;
+  --cyan: #3AABDC;
+  --white: #FFFFFF;
+  --bg-light: #F4F7FA;
+  --text-dark: #0F172A;
+  --text-muted: #64748B;
+  --border: #E2E8F0;
+  --nav-bg: #151922;
+  --card-dark: #162030;
+  --grey-body: #94A3B8;
+  --green: #15803d;
+  --green-bg: #dcfce7;
+  --red: #b91c1c;
+  --red-bg: #fee2e2;
+  --amber: #b45309;
+  --amber-bg: #fef3c7;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "Poppins", sans-serif;
+  color: var(--text-dark);
+  background: var(--white);
+  line-height: 1.5;
+}
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; display: block; }
+
+.container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+
+.label {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 11px;
+  color: var(--cyan);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 700;
+  display: block;
+}
+
+.btn {
+  display: inline-block;
+  padding: 14px 28px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.btn-filled { background: var(--cyan); color: var(--white); }
+.btn-filled:hover { background: #2f93c2; }
+.btn-outline-dark {
+  background: transparent;
+  color: var(--navy);
+  border: 1px solid var(--navy);
+}
+.btn-outline-dark:hover { background: var(--navy); color: var(--white); }
+
+/* ---------- Navbar (matches live site) ---------- */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: var(--nav-bg);
+  border-bottom: 1px solid #2a3650;
+}
+.nav-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo { display: flex; align-items: center; }
+.brand-logo { height: 44px; width: auto; display: block; }
+.nav-links { display: flex; align-items: center; gap: 32px; }
+.nav-link {
+  color: var(--grey-body);
+  font-size: 15px;
+  font-weight: 500;
+  transition: color 0.15s ease;
+}
+.nav-link:hover { color: var(--cyan); }
+.nav-link.active { color: var(--cyan); }
+.nav-cta { padding: 10px 20px; font-size: 14px; }
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 28px; height: 28px;
+  background: none; border: none; cursor: pointer;
+}
+.nav-toggle span { display: block; height: 2px; width: 100%; background: var(--white); }
+.nav-mobile-panel {
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 24px 24px;
+  background: var(--nav-bg);
+  border-bottom: 1px solid #2a3650;
+}
+.nav-mobile-panel.open { display: flex; }
+.nav-mobile-panel .nav-cta { align-self: flex-start; margin-top: 8px; }
+
+/* ---------- Hero ---------- */
+.hero {
+  background: var(--navy);
+  padding: 132px 24px 56px;
+  text-align: center;
+}
+.hero-inner { max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
+.hero .label { margin-bottom: 18px; }
+.hero h1 {
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.18;
+  margin-bottom: 18px;
+}
+.hero p {
+  font-size: 16px;
+  color: var(--grey-body);
+  max-width: 500px;
+}
+
+/* ---------- Calculator section ---------- */
+.calc-section { background: var(--bg-light); padding: 60px 0; }
+.calc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.calc-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 28px;
+}
+.calc-card .label { margin-bottom: 20px; }
+.calc-card .label + .label { margin-top: 28px; }
+
+.field { margin-bottom: 18px; }
+.field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+.field-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+.field-row label { margin-bottom: 0; }
+.field-row strong { font-size: 15px; color: var(--cyan); }
+
+.field input[type="number"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  color: var(--text-dark);
+}
+.field input[type="number"]:focus { outline: none; border-color: var(--cyan); }
+.field input[type="range"] { width: 100%; accent-color: var(--cyan); }
+.hint { font-size: 12px; color: var(--text-muted); margin-top: 6px; }
+
+.calc-divider { border-top: 1px solid var(--border); margin: 24px 0 20px; }
+
+.metric-row { display: flex; gap: 12px; margin-bottom: 28px; }
+.metric-box { flex: 1; background: #F8FAFC; border-radius: 8px; padding: 14px; }
+.metric-box span.m-label { display: block; font-size: 12px; color: var(--text-muted); margin-bottom: 6px; }
+.metric-box span.m-value { display: block; font-size: 26px; font-weight: 700; color: var(--text-dark); }
+
+.leak-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+.leak-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.leak-name { font-weight: 600; font-size: 14px; }
+.leak-right { display: flex; align-items: center; gap: 8px; }
+.pill {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+.pill-high { background: var(--red-bg); color: var(--red); }
+.pill-medium { background: var(--amber-bg); color: var(--amber); }
+.pill-low { background: var(--green-bg); color: var(--green); }
+.leak-amount { font-weight: 700; font-size: 14px; color: var(--text-dark); }
+.leak-bar-track {
+  height: 3px;
+  background: #EDF1F5;
+  border-radius: 2px;
+  margin: 10px 0 8px;
+  overflow: hidden;
+}
+.leak-bar-fill { height: 100%; border-radius: 2px; transition: width 0.2s ease; }
+.leak-context { font-size: 12px; color: var(--text-muted); }
+
+.total-leak-box {
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+}
+.total-leak-box .tl-label { font-weight: 700; font-size: 13px; color: var(--text-dark); }
+.total-leak-box .tl-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+.total-leak-box .tl-amount { font-weight: 700; font-size: 26px; color: var(--red); }
+
+/* ---------- Soft CTA ---------- */
+.soft-cta { background: var(--navy); padding: 60px 24px; text-align: center; }
+.stat-row {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto 44px;
+}
+.stat-box {
+  flex: 1;
+  background: var(--card-dark);
+  border-radius: 8px;
+  padding: 22px 16px;
+}
+.stat-number { font-size: 30px; font-weight: 700; color: var(--cyan); margin-bottom: 8px; }
+.stat-label { font-size: 13px; color: var(--white); line-height: 1.4; }
+.soft-cta h2 { font-size: 28px; color: var(--white); margin-bottom: 14px; }
+.soft-cta-body { font-size: 16px; color: var(--grey-body); max-width: 480px; margin: 0 auto 24px; }
+.soft-cta .fineprint { font-size: 12px; color: var(--text-muted); margin-top: 14px; }
+
+/* ---------- More free tools ---------- */
+.more-tools { background: var(--bg-light); padding: 60px 0; }
+.more-tools .section-heading { margin-bottom: 32px; }
+.more-tools .label { margin-bottom: 12px; }
+.more-tools h2 { font-size: 26px; color: var(--text-dark); }
+.tools-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.tool-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+}
+.tool-tag {
+  display: inline-block;
+  background: #CFFAFE;
+  color: var(--cyan);
+  font-family: "Courier New", Courier, monospace;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 8px;
+  padding: 8px;
+  margin-bottom: 14px;
+}
+.tool-card h3 { font-size: 18px; color: var(--text-dark); margin-bottom: 10px; }
+.tool-card p { font-size: 14px; color: var(--text-muted); margin-bottom: 18px; }
+
+/* ---------- Footer (matches live site) ---------- */
+.footer { background: var(--nav-bg); padding: 40px 0; }
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #1f2c40;
+}
+.footer-logo-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.footer-logo-img { width: 140px; height: auto; display: block; }
+.footer-brand span { color: var(--grey-body); font-size: 14px; }
+.footer-contact { color: var(--grey-body); font-size: 14px; text-align: right; }
+.footer-copyright { padding-top: 24px; text-align: center; color: var(--text-muted); font-size: 13px; }
+
+@media (max-width: 900px) {
+  .calc-grid, .tools-grid { grid-template-columns: 1fr; }
+  .stat-row { flex-direction: column; }
+}
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: 30px; }
+  .nav-links { display: none; }
+  .nav-toggle { display: flex; }
+  .footer-inner { flex-direction: column; }
+  .footer-contact { text-align: left; }
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="/logo.webp" alt="Ascensia" class="brand-logo">
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="/#what-we-do" class="nav-link">What We Do</a>
+      <a href="/#proof" class="nav-link">Proof</a>
+      <a href="/calculator.html" class="nav-link active">Calculator</a>
+      <a href="https://calendly.com/tanay141096/audit" class="btn btn-filled nav-cta" id="nav-audit-btn">Book Free Audit</a>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" onclick="document.getElementById('nav-mobile-panel').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-mobile-panel" id="nav-mobile-panel">
+    <a href="/#what-we-do" class="nav-link">What We Do</a>
+    <a href="/#proof" class="nav-link">Proof</a>
+    <a href="/calculator.html" class="nav-link active">Calculator</a>
+    <a href="https://calendly.com/tanay141096/audit" class="btn btn-filled nav-cta" id="nav-audit-btn-mobile">Book Free Audit</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <span class="label">Free Tool</span>
+    <h1>How much is your pipeline leaking every month?</h1>
+    <p>Put your numbers in. See exactly where revenue is escaping and what each gap costs you per month. Free. No email required.</p>
+  </div>
+</header>
+
+<section class="calc-section">
+  <div class="container">
+    <div class="calc-grid">
+
+      <div class="calc-card">
+        <span class="label">Your Pipeline Numbers</span>
+
+        <div class="field">
+          <label for="i-calls">Calls booked per month</label>
+          <input type="number" id="i-calls" value="20" min="1">
+        </div>
+
+        <div class="field">
+          <div class="field-row">
+            <label for="i-showup">Show-up rate</label>
+            <strong id="d-showup">45%</strong>
+          </div>
+          <input type="range" id="i-showup" min="10" max="100" step="1" value="45">
+        </div>
+
+        <div class="field">
+          <div class="field-row">
+            <label for="i-close">Close rate (on calls that show)</label>
+            <strong id="d-close">33%</strong>
+          </div>
+          <input type="range" id="i-close" min="5" max="80" step="1" value="33">
+        </div>
+
+        <div class="field">
+          <label for="i-deal">Average deal value (£)</label>
+          <input type="number" id="i-deal" value="2500" min="0">
+        </div>
+
+        <div class="calc-divider"></div>
+        <span class="label">Where Revenue Leaks</span>
+
+        <div class="field" style="margin-top: 16px;">
+          <label for="i-resp">Lead response time (hours)</label>
+          <input type="number" id="i-resp" value="4" step="0.25" min="0">
+          <div class="hint">Benchmark: under 5 minutes (0.08 hours)</div>
+        </div>
+
+        <div class="field" style="margin-bottom: 0;">
+          <label for="i-followup">Follow-up messages after a no-close call</label>
+          <input type="number" id="i-followup" value="2" min="0" max="20">
+          <div class="hint">Benchmark: 7+ messages</div>
+        </div>
+      </div>
+
+      <div class="calc-card">
+        <span class="label">What Your Pipeline Earns Now</span>
+        <div class="metric-row">
+          <div class="metric-box">
+            <span class="m-label">Monthly revenue</span>
+            <span class="m-value" id="o-rev">£0</span>
+          </div>
+          <div class="metric-box">
+            <span class="m-label">Clients closed</span>
+            <span class="m-value" id="o-clients">0</span>
+          </div>
+        </div>
+
+        <span class="label">Where You Are Losing It</span>
+        <div style="margin-top: 16px;">
+
+          <div class="leak-card" id="showup-leak">
+            <div class="leak-head">
+              <span class="leak-name">Show-up rate gap</span>
+              <span class="leak-right">
+                <span class="pill" id="showup-pill">Low</span>
+                <span class="leak-amount" id="showup-amount">£0</span>
+              </span>
+            </div>
+            <div class="leak-bar-track"><div class="leak-bar-fill" id="showup-bar" style="width:0%; background: var(--red);"></div></div>
+            <p class="leak-context" id="showup-context"></p>
+          </div>
+
+          <div class="leak-card" id="response-leak">
+            <div class="leak-head">
+              <span class="leak-name">Lead response delay</span>
+              <span class="leak-right">
+                <span class="pill" id="response-pill">Low</span>
+                <span class="leak-amount" id="response-amount">£0</span>
+              </span>
+            </div>
+            <div class="leak-bar-track"><div class="leak-bar-fill" id="response-bar" style="width:0%; background: var(--amber);"></div></div>
+            <p class="leak-context" id="response-context"></p>
+          </div>
+
+          <div class="leak-card" id="followup-leak">
+            <div class="leak-head">
+              <span class="leak-name">Post-call follow-up gap</span>
+              <span class="leak-right">
+                <span class="pill" id="followup-pill">Low</span>
+                <span class="leak-amount" id="followup-amount">£0</span>
+              </span>
+            </div>
+            <div class="leak-bar-track"><div class="leak-bar-fill" id="followup-bar" style="width:0%; background: var(--amber);"></div></div>
+            <p class="leak-context" id="followup-context"></p>
+          </div>
+
+        </div>
+
+        <div class="total-leak-box">
+          <div>
+            <div class="tl-label">Leaking per month</div>
+            <div class="tl-sub">Conservative estimate</div>
+          </div>
+          <div class="tl-amount" id="total-leak">£0</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="soft-cta">
+  <div class="stat-row">
+    <div class="stat-box">
+      <div class="stat-number">88.9%</div>
+      <div class="stat-label">Show-up rate achieved for a recent client event</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">3x</div>
+      <div class="stat-label">Above the 30-40% industry average for show-up rates</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">20 min</div>
+      <div class="stat-label">Free audit. No pitch. No obligation.</div>
+    </div>
+  </div>
+  <h2>Found a leak?</h2>
+  <p class="soft-cta-body">We can run this on your actual CRM data in 20 minutes and tell you exactly which fix recovers the most revenue first.</p>
+  <a href="https://calendly.com/tanay141096/audit" class="btn btn-filled" id="cta-audit-btn">Book the Free Audit</a>
+  <p class="fineprint">Free. No pitch. No obligation.</p>
+</section>
+
+<section class="more-tools">
+  <div class="container">
+    <div class="section-heading">
+      <span class="label">More Free Tools</span>
+      <h2>More ways to find the gaps.</h2>
+    </div>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <span class="tool-tag">Free Tool</span>
+        <h3>CRM Health Scorecard</h3>
+        <p>20 yes/no questions. Tells you exactly how much of your pipeline depends on you remembering to do it manually.</p>
+        <a href="/scorecard.html" class="btn btn-outline-dark">Take the Scorecard →</a>
+      </div>
+      <div class="tool-card">
+        <span class="tool-tag">Free Resource</span>
+        <h3>The 7 Follow-Up Messages</h3>
+        <p>The exact post-call sequence used in client builds. Days 1 through 21. Copy and use immediately.</p>
+        <a href="/followup.html" class="btn btn-outline-dark">Get the Messages →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo-row">
+          <img src="/logo.webp" alt="Ascensia" class="footer-logo-img">
+        </div>
+        <span>Revenue Operations Consulting</span>
+      </div>
+      <div class="footer-contact">
+        tanay141096@gmail.com<br>
+        linkedin.com/in/tanay-shah-revops-lead<br>
+        +91 9004511099
+      </div>
+    </div>
+    <p class="footer-copyright">© 2025 Ascensia. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="https://assets.calendly.com/assets/external/widget.js"></script>
+<script>
+const CALENDLY_URL = "https://calendly.com/tanay141096/audit?background_color=151922&text_color=ffffff&primary_color=3aabdc";
+['nav-audit-btn', 'nav-audit-btn-mobile', 'cta-audit-btn'].forEach(function (id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.addEventListener('click', function (e) {
+    e.preventDefault();
+    if (window.Calendly) {
+      window.Calendly.initPopupWidget({ url: CALENDLY_URL });
+    } else {
+      window.open(CALENDLY_URL, '_blank');
+    }
+  });
+});
+
+function fmt(n) {
+  return '£' + Math.round(n).toLocaleString('en-GB');
+}
+
+function fuRate(m) {
+  if (m <= 1) return 0.03;
+  if (m == 2) return 0.08;
+  if (m <= 4) return 0.15;
+  if (m <= 6) return 0.22;
+  return 0.31;
+}
+
+function respFactor(h) {
+  if (h <= 0.083) return 0;
+  if (h <= 0.5) return 0.12;
+  if (h <= 1) return 0.22;
+  if (h <= 4) return 0.38;
+  return 0.52;
+}
+
+function severity(pct) {
+  if (pct >= 45) return { cls: 'pill-high', text: 'High' };
+  if (pct >= 20) return { cls: 'pill-medium', text: 'Medium' };
+  return { cls: 'pill-low', text: 'Low' };
+}
+
+function setLeak(prefix, amount, total, context) {
+  const pct = total > 0 ? (amount / total) * 100 : 0;
+  const sev = severity(pct);
+  const pill = document.getElementById(prefix + '-pill');
+  pill.textContent = sev.text;
+  pill.className = 'pill ' + sev.cls;
+  document.getElementById(prefix + '-amount').textContent = fmt(amount);
+  document.getElementById(prefix + '-bar').style.width = Math.min(100, pct) + '%';
+  document.getElementById(prefix + '-context').textContent = context;
+}
+
+function trim(n) {
+  return Math.round(n * 100) / 100;
+}
+
+function calc() {
+  const calls = +document.getElementById('i-calls').value || 0;
+  const su = (+document.getElementById('i-showup').value || 0) / 100;
+  const cr = (+document.getElementById('i-close').value || 0) / 100;
+  const dv = +document.getElementById('i-deal').value || 0;
+  const rh = +document.getElementById('i-resp').value || 0;
+  const fu = +document.getElementById('i-followup').value || 0;
+
+  document.getElementById('d-showup').textContent = Math.round(su * 100) + '%';
+  document.getElementById('d-close').textContent = Math.round(cr * 100) + '%';
+
+  const currRev = calls * su * cr * dv;
+  const closed = calls * su * cr;
+  document.getElementById('o-rev').textContent = fmt(currRev);
+  document.getElementById('o-clients').textContent = trim(closed);
+
+  const BENCH = 0.78;
+  const gapCalls = Math.max(0, calls * (BENCH - su));
+  const leak1 = gapCalls * cr * dv;
+
+  const rf = respFactor(rh);
+  const leak2 = calls * rf * su * cr * dv;
+
+  const undecided = calls * su * (1 - cr);
+  const leak3 = Math.max(0, undecided * Math.max(0, 0.31 - fuRate(fu)) * dv);
+
+  const total = leak1 + leak2 + leak3;
+
+  const ctx1 = su < BENCH
+    ? 'You are at ' + Math.round(su * 100) + '% vs 78% benchmark — a ' + Math.round((BENCH - su) * 100) + 'pp gap. That is ' + Math.round(gapCalls) + ' calls per month that booked but did not show.'
+    : 'Your show-up rate is at or above the 78% benchmark.';
+
+  const ctx2 = rf > 0
+    ? 'At ' + trim(rh) + ' hours average response, around ' + Math.round(rf * 100) + '% of leads go cold before you reach them.'
+    : 'Response time under 5 minutes. This leak is sealed.';
+
+  const ctx3 = fu < 7
+    ? 'At ' + trim(fu) + ' follow-ups, you convert ' + Math.round(fuRate(fu) * 100) + '% of undecided prospects vs 31% at 7 touches.'
+    : 'Follow-up depth at benchmark. This leak is sealed.';
+
+  setLeak('showup', leak1, total, ctx1);
+  setLeak('response', leak2, total, ctx2);
+  setLeak('followup', leak3, total, ctx3);
+
+  document.getElementById('total-leak').textContent = fmt(total);
+}
+
+['i-calls', 'i-showup', 'i-close', 'i-deal', 'i-resp', 'i-followup'].forEach(function (id) {
+  document.getElementById(id).addEventListener('input', calc);
+});
+
+calc();
+</script>
+</body>
+</html>

@@ -14,6 +14,9 @@ export default function Navbar() {
       <a href="#proof" className="nav-link" onClick={() => setOpen(false)}>
         Proof
       </a>
+      <a href="/calculator.html" className="nav-link" onClick={() => setOpen(false)}>
+        Calculator
+      </a>
       <a href={`${basePath}/audit`} className="btn btn-filled nav-cta">
         Book Free Audit
       </a>

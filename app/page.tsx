@@ -184,10 +184,38 @@ export default function Home() {
           </div>
 
           <div className="proof-row">
-            <div className="proof-card">
-              <h4>Charlie Phillips · Coaching at £50K/month</h4>
-              <p>
-                Show-up rate stabilised with a 12-email pre-call sequence.
+            <div className="proof-card proof-card--metrics">
+              <span className="label">
+                Charlie Phillips · Coaching · £45K/Month
+              </span>
+              <div className="metric-grid">
+                <div className="metric-box">
+                  <div className="metric-number">88.9%</div>
+                  <div className="metric-label">Show-up rate</div>
+                  <div className="metric-note">vs 30-40% industry avg</div>
+                </div>
+                <div className="metric-box">
+                  <div className="metric-number">108</div>
+                  <div className="metric-label">Registrations</div>
+                  <div className="metric-note">fully automated</div>
+                </div>
+                <div className="metric-box">
+                  <div className="metric-number">52.6%</div>
+                  <div className="metric-label">Email open rate</div>
+                  <div className="metric-note">vs 20-30% industry avg</div>
+                </div>
+                <div className="metric-box">
+                  <div className="metric-number">0</div>
+                  <div className="metric-label">Spam complaints</div>
+                  <div className="metric-note">across 435 emails sent</div>
+                </div>
+              </div>
+              <p className="body">
+                Built the complete webinar funnel infrastructure end-to-end.
+                15-email pre-event sequence with automated late-registrant
+                routing, 5-SMS parallel sequence, four Zapier automations
+                connecting Zoom, GHL, and Discord. Show-up rate of 88.9% —
+                nearly triple the industry average of 30-40%.
               </p>
             </div>
             <div className="proof-card">

@@ -443,6 +443,45 @@ section {
   font-size: 14px;
 }
 
+.proof-row .proof-card--metrics {
+  padding: 32px;
+}
+
+.proof-card--metrics .label {
+  font-size: 10px;
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.metric-box {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.metric-number {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.metric-label {
+  font-size: 12px;
+  color: var(--white);
+  margin-top: 2px;
+}
+
+.metric-note {
+  font-size: 11px;
+  color: #94a3b8;
+  margin-top: 2px;
+}
+
 /* ---------- Who it's for ---------- */
 
 .fit-grid {
